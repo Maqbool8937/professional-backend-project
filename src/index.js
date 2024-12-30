@@ -12,7 +12,13 @@ console.log("MONGODB_URI:", process.env.MONGODB_URI); // Debug log
 const app = express();
 
 import connectDB from "./db/dbconnect.js";
-connectDB();
+connectDB()
+.then(()=>{
+    app.listen(process.env.PORT || 8000, ()=>{
+        console.log(`server is running at port ${process.env.PORT}`);
+    })
+})
+.catch((error)=>console.error("ERROR:",error.message || error))
 
 
 
